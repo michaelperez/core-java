@@ -4,7 +4,9 @@ import java.io.Writer;
 
 /**
  * This class demonstrates using the try-with-resources statement to ensure each resource is closed
- * at the end of the statement.
+ * at the end of the statement. The resources must implement the AutoClosable or Closable interfaces.
+ *
+ * When working with try-with-resources, you should look at both the exception thrown and any suppressed exceptions.
  */
 public class TryWithResourcesRunner {
 
@@ -30,6 +32,9 @@ public class TryWithResourcesRunner {
 
         } catch (IOException ioe) {
             System.out.println(ioe.getClass().getSimpleName() + " - " + ioe.getMessage());
+
+            for(Throwable t : ioe.getSuppressed())
+                System.out.println("Suppressed: " + t.getMessage());
         }
 
     }
@@ -56,6 +61,9 @@ public class TryWithResourcesRunner {
 
         } catch (IOException ioe) {
             System.out.println(ioe.getClass().getSimpleName() + " - " + ioe.getMessage());
+
+            for(Throwable t : ioe.getSuppressed())
+                System.out.println("Suppressed: " + t.getMessage());
         }
     }
 }
